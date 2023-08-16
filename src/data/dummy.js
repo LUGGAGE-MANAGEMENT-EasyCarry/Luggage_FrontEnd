@@ -69,6 +69,7 @@ const customerGridState = (props) => (
 export const links = [
 
   {
+    title: 'slm',
     links: [
       {
         name: 'homepage',

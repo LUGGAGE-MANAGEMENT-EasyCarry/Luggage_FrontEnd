@@ -11,37 +11,45 @@ import axios from 'axios';
 const Customers = () => {
 
   const [customers,setCustomers] = useState([]);
+
+  useEffect(() => {
+    getCustomersData();
+  }, [])
+
   const getCustomersData = () => {
     return axios.get("http://localhost:8089/backoffice/customers").then((response) => {
       setCustomers(response.data)
     })
   }
-  useEffect(() => {
-    getCustomersData();
-  }, [])
-  
+
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
     <Header title="Customers"/>
-      <GridComponent
-          dataSource={customers}
-          allowPaging
-          allowSorting
-          toolbar={['Delete','Search']}
-          editSettings={{allowDeleting: true, allowEditing: true}}
-          width="auto"
-          className="mt-10"
-      >
-        <ColumnsDirective>
-        {customers.map((item, index) => (
-            <ColumnDirective 
-              key={index} {...item}
-            />
-        ))}
-        </ColumnsDirective>
-        <Inject services={[Page, Selection, Edit, Sort, Filter, Toolbar]} />
-      </GridComponent>
+    <div className="max-w-4xl mx-auto p-4">
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-gray-100">
+          <tr>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">sort</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer ID</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone Number</th>
+          </tr>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {customers.map((customer, index) => (
+            <tr key={index}>
+              <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{customer.id}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{customer.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{customer.email}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{customer.phoneNumber}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
+  </div>
   )
 }
 
