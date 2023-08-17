@@ -14,6 +14,7 @@ const Flights = () => {
   useEffect(() => {
     getFlightsData();
   }, [])
+  
   const getFlightsData = () => {
     return axios.get("http://localhost:8089/backoffice/api/flights").then((response) => {
       setFlights(response.data)

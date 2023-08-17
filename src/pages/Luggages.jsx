@@ -1,15 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { GridComponent, ColumnsDirective, ColumnDirective, Page,
-Selection, Inject, Edit, Toolbar, Sort, Filter } from '@syncfusion/ej2-react-grids';
-
-import { luggagesData, luggagesGrid } from '../data/dummy';
-import { Header } from '../components';
+import { Header, Button} from '../components';
 import axios from 'axios';
 
 const Luggages = () => {
 
   const [luggages,setLuggages] = useState([]);
-
+  
   const getLuggagesData = () => {
     return axios.get("http://localhost:8089/backoffice/api/v1/luggage").then((response) => {
       setLuggages(response.data)
@@ -18,6 +14,24 @@ const Luggages = () => {
   useEffect(() => {
     getLuggagesData();
   }, [])
+
+  const [newStateValue, setNewStateValue] = useState('');
+  
+  const handleStateChange = async (index) => {
+
+    const updatedLuggages = [...luggages];
+    updatedLuggages[index].state = newStateValue;
+    const luggageId = updatedLuggages[index].luggageId;
+    setLuggages(updatedLuggages);
+    try {
+      await axios.patch(
+        `http://localhost:8089/backoffice/api/v1/luggage/edit/status/${luggageId}?state=${newStateValue}`
+      );
+    } catch (error) {
+      console.error("Error updating luggage state:", error);
+    }
+   
+  };
 
   return (
     <div>
@@ -33,6 +47,7 @@ const Luggages = () => {
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Flight ID</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer ID</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">State</th>
+           
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
@@ -44,6 +59,26 @@ const Luggages = () => {
               <td className="px-6 py-4 whitespace-nowrap">{easyFly.flightId}</td>
               <td className="px-6 py-4 whitespace-nowrap">{easyFly.customerId}</td>
               <td className="px-6 py-4 whitespace-nowrap">{easyFly.state}</td>
+              <td className="px-6 py-4 whitespace-nowrap"> 
+                  <select
+                    value={newStateValue}
+                    onChange={(e) => setNewStateValue(e.target.value)}
+                  >
+                   
+                    <option value="PENDING">PENDING</option>
+                    <option value="COMPLETED">COMPLETED</option>
+                  </select>
+                  <Button
+                   color="white"
+                   bgColor="gray"
+                   text="edit"
+                   borderRadius="10px"
+                   size="md" 
+                   className="mt-10"
+                    onClick={() => handleStateChange(index)}
+                  />
+              </td>
+              
             </tr>
           ))}
         </tbody>
