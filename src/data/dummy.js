@@ -13,7 +13,6 @@ import avatar3 from './avatar3.png';
 import avatar4 from './avatar4.jpg';
 import product1 from './product1.jpg';
 import product2 from './product2.jpg';
-import product3 from './product3.jpg';
 import product4 from './product4.jpg';
 import product5 from './product5.jpg';
 import product6 from './product6.jpg';
@@ -69,7 +68,6 @@ const customerGridState = (props) => (
 export const links = [
 
   {
-    title: 'slm',
     links: [
       {
         name: 'homepage',

@@ -1,8 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { GridComponent, ColumnsDirective, ColumnDirective, Page,
-Selection, Inject, Edit, Toolbar, Sort, Filter } from '@syncfusion/ej2-react-grids';
-
-import { customersData, customersGrid } from '../data/dummy';
 import { Header } from '../components';
 
 import axios from 'axios';
@@ -25,7 +21,7 @@ const Customers = () => {
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
     <Header title="Customers"/>
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="max-w-6xl mx-auto p-4">
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-100">
           <tr>

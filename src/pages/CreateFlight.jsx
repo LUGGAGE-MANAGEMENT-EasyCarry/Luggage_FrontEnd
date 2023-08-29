@@ -31,7 +31,7 @@ const CreateFlight = () => {
   };
 
   return (
-    <div className="p-6 m-20 w-600 bg-gray-200 hover:bg-gray-300">
+    <div className="p-6 m-20 w-500 bg-gray-200 hover:bg-gray-300 rounded-3xl">
       <div className="justify-center">
         <h3 className="font-extrabold text-gray-600 flex justify-center mb-5">Create New Flight</h3>
         <div className="textbox-form">
@@ -61,21 +61,20 @@ const CreateFlight = () => {
               floatLabelType="Auto"
             />
             <DatePickerComponent
-              type="text"
-              name="flightDate"
-              value={createFlight.flightDate}
-              onChange={(e) => onInputAdd('flightDate', e.value)}
-              placeholder="Flight Date"
-              floatLabelType="Auto"
+                name="flightDate"
+                value={createFlight.flightDate}
+                onChange={(e) => onInputAdd('flightDate', e.value)}
+                placeholder="Flight Date"
+                floatLabelType="Auto"
             />
              <Button 
-              color="white"
-              bgColor="gray"
-              text="Save"
-              borderRadius="10px"
-              size="md" 
-              className="mt-10"
-              onClick={onSubmit}
+                color="white"
+                bgColor="gray"
+                text="Save"
+                borderRadius="10px"
+                size="md" 
+                className="mt-10"
+                onClick={onSubmit}
              />
           </form>
         </div>

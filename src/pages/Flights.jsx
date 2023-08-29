@@ -1,8 +1,4 @@
 import React, {useState,useEffect} from 'react';
-import { GridComponent, ColumnsDirective, ColumnDirective, Page,
-Selection, Inject, Edit, Toolbar, Sort, Filter } from '@syncfusion/ej2-react-grids';
-
-import { flighData, flightsGrid } from '../data/dummy';
 import { Header, Button } from '../components';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
@@ -16,7 +12,7 @@ const Flights = () => {
   }, [])
   
   const getFlightsData = () => {
-    return axios.get("http://localhost:8089/backoffice/api/flights").then((response) => {
+    return axios.get("http://localhost:8089/backoffice/api/flights",flights).then((response) => {
       setFlights(response.data)
     })
   }
@@ -35,7 +31,7 @@ const Flights = () => {
             />
           </Link>
       </div>
-      <div className="max-w-4xl mx-auto p-4">
+      <div className="max-w-6xl mx-auto p-4">
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-100">
           <tr>
