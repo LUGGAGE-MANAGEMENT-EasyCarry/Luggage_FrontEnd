@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Navbar, Sidebar } from "./components";
@@ -10,12 +10,12 @@ import Auth from './Auth';
 const App = () => {
 
   const {activeMenu} = useStateContext();
-  const [authenticateUser, setAuthenticateUser] = useState(false);
+  const [authenticateUser, setAuthenticateUser] = useState();
 
   return (
     <div>
       <Router>
-      
+      {authenticateUser ? (
        <div className="flex relative dark:bg-main-dark-bg">
          {activeMenu ? (
            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
@@ -33,20 +33,22 @@ const App = () => {
          >
          <div className="fixed md:static bd-main-bg dark:bg-main-dark-bg navbar w-full">
            <Navbar/>
-         </div> 
-         <div> 
-          <Routes>
-             <Route path="/" element={<HomePage/>}/>
-             <Route path="/homepage" element={<HomePage/>}/>
-             <Route path="/flights" element={<Flights/>}/>
-             <Route path="/customers" element={<Customers/>}/>
-             <Route path="/luggages" element={<Luggages/>}/>
-             <Route path="/createflight" element={<CreateFlight/>}/>
-          </Routes>
-         </div>
-       </div> 
+          </div> 
+          <div> 
+            <Routes>
+              <Route path="/" element={<HomePage/>}/>
+              <Route path="/homepage" element={<HomePage/>}/>
+              <Route path="/flights" element={<Flights/>}/>
+              <Route path="/customers" element={<Customers/>}/>
+              <Route path="/luggages" element={<Luggages/>}/>
+              <Route path="/createflight" element={<CreateFlight/>}/>
+            </Routes>
+          </div>
+        </div> 
        </div>
-    
+      ):
+      <Auth setAuthenticateUser={setAuthenticateUser} />
+      }
       </Router>
     </div>
   );

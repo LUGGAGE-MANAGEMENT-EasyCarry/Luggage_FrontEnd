@@ -46,10 +46,10 @@ const Login = () => {
               placeholder="E-mail Adress"
               floatLabelType="Auto"
             />
-          </div>
+        </div>
           <div className="mb-4">
             <TextBoxComponent
-              type="text"
+              type="password"
               name="password"
               value={authenticateUser.password}
               onChange={(e) => onInputAdd('password', e.target.value)}

@@ -4,7 +4,6 @@ import {FiShoppingCart} from 'react-icons/fi';
 import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
-import avatar from '../data/avatar3.png';
 import { Notification, UserProfile} from '.';
 import {useStateContext} from '../contexts/ContextProvider';
 
@@ -26,8 +25,8 @@ const NavButtton = ({title, customFunc, icon, color, dotColor}) => (
 
 const Navbar = () => {
 
-  const {activeMenu, setActiveMenu, 
-         isClicked, setIsClicked,
+  const {setActiveMenu, 
+         isClicked,
          handleClick,
          screenSize, setScreenSize} = useStateContext();
 
@@ -68,9 +67,6 @@ const Navbar = () => {
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={() => handleClick ('userProfile')}
             > 
-              <img className= "rounded-full w-  h-8"
-                src={avatar} 
-                />
                 <p>
                   <span className="text-gray-400 text-14"> Hoşgeldin, </span> {''}
                   <span className=" text-gray-400 font-bold ml-1 text-14"> Furkan </span>
